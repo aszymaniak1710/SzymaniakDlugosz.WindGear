@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Interfaces\SzymaniakDlugosz.WindGear.Interfaces.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Core\SzymaniakDlugosz.WindGear.Core.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y /D &quot;$(TargetDir)$(TargetName).dll&quot; &quot;..\SzymaniakDlugosz.WindGear.UI\bin\$(Configuration)\net9.0-windows\&quot;" />
+  </Target>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

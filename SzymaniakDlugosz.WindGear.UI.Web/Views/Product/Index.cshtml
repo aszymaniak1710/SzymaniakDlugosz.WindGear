@@ -1,0 +1,44 @@
+@model IEnumerable<SzymaniakDlugosz.WindGear.Interfaces.IProduct>
+
+<h1>Products</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Search by Model or Manufacturer..." value="@ViewContext.HttpContext.Request.Query["searchString"]" />
+        <button type="submit" class="btn btn-outline-secondary">Search</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Model)</th>
+            <th>Manufacturer</th>
+            <th>Type</th>
+            <th>Area</th>
+            <th>Material</th>
+            <th>Camber</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Model)</td>
+            <td>@Html.DisplayFor(modelItem => item.Manufacturer.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Type)</td>
+            <td>@Html.DisplayFor(modelItem => item.Area)</td>
+            <td>@Html.DisplayFor(modelItem => item.Material)</td>
+            <td>@Html.DisplayFor(modelItem => item.IsCamber)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

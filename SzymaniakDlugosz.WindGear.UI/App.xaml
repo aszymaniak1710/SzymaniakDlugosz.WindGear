@@ -1,0 +1,8 @@
+﻿<Application x:Class="SzymaniakDlugosz.WindGear.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SzymaniakDlugosz.WindGear.UI">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

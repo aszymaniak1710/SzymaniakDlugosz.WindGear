@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.BL\SzymaniakDlugosz.WindGear.BL.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Interfaces\SzymaniakDlugosz.WindGear.Interfaces.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Core\SzymaniakDlugosz.WindGear.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.BL\SzymaniakDlugosz.WindGear.BL.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Core\SzymaniakDlugosz.WindGear.Core.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Interfaces\SzymaniakDlugosz.WindGear.Interfaces.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+  </ItemGroup>
+
+  <Target Name="CopyDAOPlugins" AfterTargets="Build">
+    <ItemGroup>
+      <DaoPlugins Include="..\SzymaniakDlugosz.WindGear.DAOMock\bin\$(Configuration)\net9.0\SzymaniakDlugosz.WindGear.DAOMock.dll" />
+      <DaoPlugins Include="..\SzymaniakDlugosz.WindGear.DAOSQL\bin\$(Configuration)\net9.0\SzymaniakDlugosz.WindGear.DAOSQL.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DaoPlugins)" DestinationFolder="$(OutDir)" />
+  </Target>
+</Project>

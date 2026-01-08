@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.DAOSQL\SzymaniakDlugosz.WindGear.DAOSQL.csproj" />
+    <ProjectReference Include="..\SzymaniakDlugosz.WindGear.Interfaces\SzymaniakDlugosz.WindGear.Interfaces.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
