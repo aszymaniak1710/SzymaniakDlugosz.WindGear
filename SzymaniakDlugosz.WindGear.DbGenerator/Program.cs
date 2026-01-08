@@ -4,6 +4,7 @@ using SzymaniakDlugosz.WindGear.Interfaces;
 
 namespace SzymaniakDlugosz.WindGear.DbGenerator
 {
+    // Generowanie bazy danych i seedowanie przykładowych danych
     class Program
     {
         static void Main(string[] args)
@@ -11,10 +12,10 @@ namespace SzymaniakDlugosz.WindGear.DbGenerator
             Console.WriteLine("Generating Database...");
             try 
             {
-                // Instantiate DAOSQL. In its constructor, it runs EnsureCreated() and seeds data.
+                // Tworzenie instancji klasy DAOSQL przy użyciu interfejsu IDAO
                 IDAO dao = new DAOSQL.DAOSQL();
                 
-                // Verify data
+                // Wywołanie DAO do pobrania producentów
                 var mans = dao.GetAllManufacturers();
                 Console.WriteLine($"Database generated with {mans.Count} manufacturers.");
                 Console.WriteLine("Done.");

@@ -5,6 +5,8 @@ using SzymaniakDlugosz.WindGear.Interfaces;
 
 namespace SzymaniakDlugosz.WindGear.DAOSQL
 {
+    // Definicje klas dla EF SQL
+    // Implementacja interfejsu IManufacturer
     public class Manufacturer : IManufacturer
     {
         [Key]
@@ -17,7 +19,7 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         
         public int FoundedYear { get; set; }
     }
-
+    // Implementacja interfejsu IProduct
     public class Product : IProduct
     {
         [Key]
@@ -37,13 +39,14 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         public int ManufacturerId { get; set; }
         
         [ForeignKey("ManufacturerId")]
-        [NotMapped] // Interface property navigation issue in EF sometimes, but let's try mapping it if we cast
+        [NotMapped] 
         public IManufacturer Manufacturer 
         { 
             get => ManufacturerEntity; 
             set => ManufacturerEntity = value as Manufacturer; 
         }
-
+        // Nawigacja do producenta 
+        // Virtual umozliwia lazy loading 
         public virtual Manufacturer ManufacturerEntity { get; set; }
     }
 }

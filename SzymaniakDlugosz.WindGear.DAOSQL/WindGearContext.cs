@@ -2,24 +2,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SzymaniakDlugosz.WindGear.DAOSQL
 {
+    // Kontekst Entity Framework
+    // Po³¹czenie z baz¹ danych
     public class WindGearContext : DbContext
     {
-        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; } // kolekcja obiektów odpowiadaj¹ca tabeli w bazie danych
         public DbSet<Product> Products { get; set; }
 
         public WindGearContext()
         {
-            // Just for parameterless constructor
-            // Database.EnsureCreated(); // Better to call this in DAO constructor or explicit init to avoid issues during design time
+            // Tworzenie instancji kontekstu bez parametrów
         }
 
+        // Opcje kontekstu 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
+            if (!optionsBuilder.IsConfigured) // czy wczeœniej ustawiony provider
             {
-                 // Path relative to execution? Ideally configurable path.
-                 // For now hardcoded or relative to DLL.
-                 optionsBuilder.UseSqlite("Data Source=WindGear.db");
+                 optionsBuilder.UseSqlite("Data Source=WindGear.db"); // Baza SQLite
             }
         }
     }

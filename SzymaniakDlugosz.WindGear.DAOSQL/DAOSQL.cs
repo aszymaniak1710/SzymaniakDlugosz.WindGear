@@ -12,9 +12,10 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         {
             using (var context = new WindGearContext())
             {
+                // Jeœli baza danych nie istnieje, to jest tworzona
                 context.Database.EnsureCreated();
                 
-                // Seed if empty
+                // Jeœli puste - seed danych
                 if (!context.Manufacturers.Any())
                 {
                     var m1 = new Manufacturer { Name = "Severne", Country = "Australia", FoundedYear = 2003 };
@@ -33,9 +34,7 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         {
             using (var db = new WindGearContext())
             {
-                // ToList returns concrete types, but they are IManufacturer compatible.
-                // We need to verify if List<Manufacturer> can be returned as List<IManufacturer>. 
-                // No, List<T> is invariant. We must Cast/Convert.
+                //Pobranie producentów z bazy i konwersja do List<IManufacturer>
                 return db.Manufacturers.ToList<IManufacturer>();
             }
         }
@@ -44,8 +43,9 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         {
              using (var db = new WindGearContext())
             {
+                // Pobranie jednoczeœnie danych producenta - eager loading
                 var list = db.Products.Include(p => p.ManufacturerEntity).ToList();
-                // Fix up interface property
+                // Ustawienie pola Product.Manufacturer na obiekt producenta
                 foreach(var item in list) item.Manufacturer = item.ManufacturerEntity;
                 return list.Cast<IProduct>().ToList();
             }
@@ -55,13 +55,12 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         {
             using (var db = new WindGearContext())
             {
-                // We receive an interface, likely from BL which got it from CreateManufacturer().
-                // If it's our concrete type, we can attach.
+                // Dodanie do kontekstu i zapisanie zmian
                 if (manufacturer is Manufacturer m)
                 {
                     db.Manufacturers.Add(m);
                     db.SaveChanges();
-                    manufacturer.Id = m.Id; // Update ID
+                    manufacturer.Id = m.Id; // Aktualizacja ID po dodaniu (dla BL)
                 }
             }
         }
@@ -79,6 +78,7 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
             }
         }
 
+        // Przekazanie obiektu do EF do Update()
         public void UpdateManufacturer(IManufacturer manufacturer)
         {
              using (var db = new WindGearContext())
@@ -107,8 +107,8 @@ namespace SzymaniakDlugosz.WindGear.DAOSQL
         {
             using (var db = new WindGearContext())
             {
-                var item = db.Manufacturers.Find(id);
-                if (item != null)
+                var item = db.Manufacturers.Find(id); // Szukanie po kluczu g³ównym
+                if (item != null) // Jeœli istnieje, usuwanie
                 {
                     db.Manufacturers.Remove(item);
                     db.SaveChanges();

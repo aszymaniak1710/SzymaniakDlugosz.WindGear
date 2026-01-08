@@ -19,31 +19,28 @@ namespace SzymaniakDlugosz.WindGear.BL
 
         private void LoadDAO()
         {
-            // Read config
+            // config
             string daoAssemblyKey = ConfigurationManager.AppSettings["DAOLibrary"];
             if (string.IsNullOrEmpty(daoAssemblyKey))
             {
-                // Fallback or error? Let's default to Mock if missing for safety, or throw.
-                // Requirement says name must be in config.
                 throw new ConfigurationErrorsException("DAOLibrary key is missing in configuration.");
             }
 
-            // The requirement says "Nazwa biblioteki DAO musi znajdować się w pliku konfiguracyjnym"
-            // We assume the DLL is in the same directory as the executable.
+            // Nazwa biblioteki DAO z pliku konfiguracyjnego
             
             string assemblyPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, daoAssemblyKey);
-            // If user provided just name like "SzymaniakDlugosz.WindGear.DAOMock.dll"
+            // Nazwa np SzymaniakDlugosz.WindGear.DAOMock.dll
             
             if (!File.Exists(assemblyPath))
             {
-                 // Try without .dll extension if missing
+                 // Próba dodania rozszerzenia .dll
                  if (File.Exists(assemblyPath + ".dll")) assemblyPath += ".dll";
                  else throw new FileNotFoundException($"DAO Assembly not found at {assemblyPath}");
             }
 
             Assembly assembly = Assembly.LoadFrom(assemblyPath);
             
-            // Find type implementing IDAO
+            // Szukanie klasy implementującej IDAO
             Type daoType = assembly.GetTypes().FirstOrDefault(t => typeof(IDAO).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
             
             if (daoType == null)
@@ -53,6 +50,9 @@ namespace SzymaniakDlugosz.WindGear.BL
 
             _dao = (IDAO)Activator.CreateInstance(daoType);
         }
+
+        // Late binding względem DAO
+        // _dao to typ nieznany w czasie kompilacji
 
         public List<IManufacturer> GetManufacturers()
         {
@@ -108,7 +108,7 @@ namespace SzymaniakDlugosz.WindGear.BL
             return _dao.CreateProduct();
         }
         
-        // Validation Logic
+        // Logika walidacji
         private void ValidateManufacturer(IManufacturer m)
         {
             if (string.IsNullOrWhiteSpace(m.Name)) throw new ArgumentException("Manufacturer Name cannot be empty.");
@@ -121,7 +121,7 @@ namespace SzymaniakDlugosz.WindGear.BL
             if (string.IsNullOrWhiteSpace(p.Model)) throw new ArgumentException("Model cannot be empty.");
             if (p.Area <= 0 || p.Area > 20) throw new ArgumentException("Area must be between 0 and 20 m².");
             if (string.IsNullOrWhiteSpace(p.Material)) throw new ArgumentException("Material cannot be empty.");
-            // Type is enum, always valid if set
+            // Typ enum, ustawiony zawsze ok
             if (p.ManufacturerId <= 0) throw new ArgumentException("Product must be assigned to a Manufacturer.");
         }
     }

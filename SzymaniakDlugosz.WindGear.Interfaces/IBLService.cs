@@ -4,6 +4,7 @@ namespace SzymaniakDlugosz.WindGear.Interfaces
 {
     public interface IBLService
     {
+        // CRUD dla producentów i produktów
         List<IManufacturer> GetManufacturers();
         List<IProduct> GetProducts();
         
@@ -18,7 +19,5 @@ namespace SzymaniakDlugosz.WindGear.Interfaces
         
         IManufacturer CreateManufacturer();
         IProduct CreateProduct();
-        
-        // Additional business logic like validation could go here
     }
 }

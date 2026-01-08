@@ -28,13 +28,12 @@ namespace SzymaniakDlugosz.WindGear.DAOMock
 
         public List<IManufacturer> GetAllManufacturers()
         {
-            return _manufacturers.ToList(); // Return copy
+            return _manufacturers.ToList(); // Zwróæ kopiê
         }
 
         public List<IProduct> GetAllProducts()
         {
-             // Join logic if needed for Manufacturer property, but for now just return list.
-             // Manually linking objects to emulate ORM behavior
+             // Przypisanie producenta do produktu
              foreach(var p in _products)
              {
                  p.Manufacturer = _manufacturers.FirstOrDefault(m => m.Id == p.ManufacturerId);
@@ -85,7 +84,7 @@ namespace SzymaniakDlugosz.WindGear.DAOMock
             if (item != null)
             {
                 _manufacturers.Remove(item);
-                // Cascade delete? Simple mock, maybe yes.
+                // Usuwanie kaskadowe
                 _products.RemoveAll(p => p.ManufacturerId == id);
             }
         }
@@ -106,7 +105,7 @@ namespace SzymaniakDlugosz.WindGear.DAOMock
             return new Product();
         }
         
-        // Private implementations of interfaces
+        // Prywatne implementacje interfejsów
         private class Manufacturer : IManufacturer
         {
             public int Id { get; set; }
