@@ -43,8 +43,9 @@
         <TextBlock Grid.Row="3" Text="Manufacturer"/>
         <ComboBox Grid.Row="4" ItemsSource="{Binding AvailableManufacturers}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding ManufacturerId}"/>
         
-        <TextBlock Grid.Row="5" Text="Area (m²)"/>
-        <TextBox Grid.Row="6" Text="{Binding Area, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Grid.Row="5" Text="Area (m²) - use dot to seperate integer and fraction"/>
+            <TextBox Grid.Row="6" Text="{Binding Area, UpdateSourceTrigger=LostFocus,
+                   StringFormat=F1}"/>
         
         <TextBlock Grid.Row="7" Text="Material"/>
         <TextBox Grid.Row="8" Text="{Binding Material, UpdateSourceTrigger=PropertyChanged}"/>

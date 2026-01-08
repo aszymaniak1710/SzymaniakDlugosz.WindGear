@@ -44,18 +44,18 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductViewModel model)
+        public IActionResult Create(ProductViewModel productModel)
         {
             ModelState.Remove(nameof(ProductViewModel.Manufacturer));
             if (ModelState.IsValid)
             {
                 var product = _bl.CreateProduct();
-                product.Model = model.Model;
-                product.ManufacturerId = model.ManufacturerId;
-                product.Area = model.Area;
-                product.Material = model.Material;
-                product.Type = model.Type;
-                product.IsCamber = model.IsCamber;
+                product.Model = productModel.Model;
+                product.ManufacturerId = productModel.ManufacturerId;
+                product.Area = productModel.Area;
+                product.Material = productModel.Material;
+                product.Type = productModel.Type;
+                product.IsCamber = productModel.IsCamber;
 
                 try
                 {
@@ -72,7 +72,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
                 }
             }
             PrepareViewBags();
-            return View(model);
+            return View(productModel);
         }
 
         public IActionResult Edit(int id)
@@ -95,7 +95,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductViewModel model)
+        public IActionResult Edit(ProductViewModel productModel)
         {
             ModelState.Remove(nameof(ProductViewModel.Manufacturer));
             if (ModelState.IsValid)
@@ -103,7 +103,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
                 try
                 {
                     // Just use the ViewModel as IProduct, assuming it works with BL validation
-                    _bl.UpdateProduct(model);
+                    _bl.UpdateProduct(productModel);
                     return RedirectToAction(nameof(Index));
                 }
                 catch (ArgumentException ex)
@@ -116,7 +116,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
                 }
             }
             PrepareViewBags();
-            return View(model);
+            return View(productModel);
         }
 
         public IActionResult Delete(int id)
