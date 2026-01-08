@@ -40,7 +40,7 @@ namespace SzymaniakDlugosz.WindGear.BL
 
             Assembly assembly = Assembly.LoadFrom(assemblyPath);
             
-            // Szukanie klasy implementującej IDAO
+            // Szukanie klasy implementującej IDAO 
             Type daoType = assembly.GetTypes().FirstOrDefault(t => typeof(IDAO).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
             
             if (daoType == null)

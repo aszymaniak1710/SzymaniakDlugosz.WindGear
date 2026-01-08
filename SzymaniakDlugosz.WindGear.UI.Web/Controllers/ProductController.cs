@@ -18,7 +18,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
         private void PrepareViewBags()
         {
             ViewBag.Manufacturers = new SelectList(_bl.GetManufacturers(), "Id", "Name");
-            // Enum logic
+            // Enum logika
              ViewBag.SailTypes = new SelectList(Enum.GetValues(typeof(SailType)));
         }
 
@@ -102,7 +102,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
             {
                 try
                 {
-                    // Just use the ViewModel as IProduct, assuming it works with BL validation
+                    // U¿ycie ViewModel jako IProduct, zak³adaj¹c ¿e bêdzie to wspó³pracowa³o z BL
                     _bl.UpdateProduct(productModel);
                     return RedirectToAction(nameof(Index));
                 }

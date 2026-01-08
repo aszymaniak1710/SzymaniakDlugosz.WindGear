@@ -15,8 +15,6 @@ namespace SzymaniakDlugosz.WindGear.Interfaces
         
         void DeleteManufacturer(int id);
         void DeleteProduct(int id);
-        
-        // Factory methods to create instances of data objects
         IManufacturer CreateManufacturer();
         IProduct CreateProduct();
     }

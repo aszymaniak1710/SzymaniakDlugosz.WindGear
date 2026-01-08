@@ -84,7 +84,7 @@ namespace SzymaniakDlugosz.WindGear.UI.ViewModels
             _model = model;
             _bl = bl;
             _navigate = navigate;
-            _isNew = model.Id == 0; // Assuming 0 is default new ID
+            _isNew = model.Id == 0; // 0 to domyœlne Id
 
             SaveCommand = new RelayCommand(o => Save());
             CancelCommand = new RelayCommand(o => Cancel());

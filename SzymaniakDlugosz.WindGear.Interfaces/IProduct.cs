@@ -12,6 +12,6 @@ namespace SzymaniakDlugosz.WindGear.Interfaces
         bool IsCamber { get; set; }
         
         int ManufacturerId { get; set; }
-        IManufacturer Manufacturer { get; set; } // Navigation property if needed, mostly for View
+        IManufacturer Manufacturer { get; set; }
     }
 }

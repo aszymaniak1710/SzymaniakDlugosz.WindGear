@@ -18,7 +18,7 @@ namespace SzymaniakDlugosz.WindGear.DAOMock
             _manufacturers = new List<IManufacturer>();
             _products = new List<IProduct>();
 
-            // Seed some data
+            // Seed danych
             AddManufacturer(new Manufacturer { Name = "NeilPryde", Country = "Hong Kong", FoundedYear = 1970 });
             AddManufacturer(new Manufacturer { Name = "Duotone", Country = "Austria", FoundedYear = 2018 });
 

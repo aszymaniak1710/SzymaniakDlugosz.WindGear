@@ -29,10 +29,6 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Map ViewModel to IManufacturer implementation handled by BL implementation or simple cast if model implements interface directly
-                // Since ViewModel implements interface we can pass it, but BL creates new instances typically.
-                // However, our BL takes IManufacturer. Let's create a new one using BL factory or just pass the model if it fits.
-                // The safest way with current BL API which has CreateManufacturer() is to map properties.
                 
                 var manufacturer = _bl.CreateManufacturer();
                 manufacturer.Name = model.Name;
@@ -76,16 +72,6 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // We need to get the "real" object or just pass a compatible object.
-                // The BL might rely on specific implementation types from DAO if not careful, 
-                // but usually it works on Interfaces.
-                // Let's assume we can map back to a fresh object or the viewmodel itself if it's accepted.
-                // As ViewModel implements IManufacturer, we can try passing it directly IF the DAO accepts arbitrary implementations (which it should).
-                // However, to be safe and cleaner, let's look up or map.
-                // Since we don't have "GetById" in BL, we filter from GetAll.
-                
-                // Constructing an object to pass to Update.
-                // Since our ViewModel implements IManufacturer, we can effectively use it as a DTO.
                 try
                 {
                     _bl.UpdateManufacturer(model);

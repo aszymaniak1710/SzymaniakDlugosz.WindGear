@@ -12,7 +12,7 @@ namespace SzymaniakDlugosz.WindGear.UI
 
             try
             {
-                // Dependency Injection
+                // Wstzrykiwanie zależności : dependency injection
                 IBLService blService = new BLService();
                 MainViewModel mainViewModel = new MainViewModel(blService);
                 

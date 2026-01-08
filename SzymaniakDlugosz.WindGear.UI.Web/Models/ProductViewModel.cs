@@ -14,7 +14,7 @@ namespace SzymaniakDlugosz.WindGear.UI.Web.Models
         [Required(ErrorMessage = "Manufacturer is required")]
         public int ManufacturerId { get; set; }
         
-        // Navigation property for display
+        // Właściwość nawigacji dla widoku
         public IManufacturer? Manufacturer { get; set; }
 
         [Required(ErrorMessage = "Area is required")]

@@ -25,7 +25,7 @@ namespace SzymaniakDlugosz.WindGear.UI
             ShowManufacturersCommand = new RelayCommand(o => ShowManufacturers());
             ShowProductsCommand = new RelayCommand(o => ShowProducts());
             
-            // Default view
+            // Domyœlny widok
             ShowManufacturers();
         }
 
